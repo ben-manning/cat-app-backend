@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const port = process.env.PORT || 3000;
 const catRoutes = require('./routes/cats');
 
@@ -10,6 +11,11 @@ require('./config/database');
 
 // MIDDLEWARE
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+
+app.get('/', (req, res) => {
+  res.json({ msg: 'Welcome to Bens API'});
+})
 
 // ROUTERS
 app.use('/cats', catRoutes);
